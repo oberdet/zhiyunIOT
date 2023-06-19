@@ -251,5 +251,24 @@ def myjjj():
 def video_start():
     # 通过将一帧帧的图像返回，就达到了看视频的目的。multipart/x-mixed-replace是单次的http请求-响应模式，如果网络中断，会导致视频流异常终止，必须重新连接才能恢复
     return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+  @app.errorhandler(400)  
+def page_not_found(error):  
+
+    return '<h1>错误代码：400</h1>',400  
+    # return "error_code:400"  
+ 
+@app.errorhandler(410)  
+def page_not_found(error):  
+
+    return '<h1>错误代码：410</h1>',410  
+ 
+@app.errorhandler(500)  
+def page_not_found(error):  
+
+    return '<h1>错误代码：500</h1>',500  
+@app.errorhandler(404)  
+def page_not_found(error):  
+    user_agent = request.args
+    return '<h1>错误代码：404</h1>%s'%user_agent,404  
 if __name__ == '__main__':
     app.run('0.0.0.0',8999)
