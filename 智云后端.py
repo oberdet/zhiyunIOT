@@ -166,12 +166,12 @@ sqql=viewmysql()
 @app.route('/',methods=['POST','GET'])
 def index():
     if request.method=="POST":
-        user_agent = request.get_data()
+        user_agent = request.args
         da=json.loads(user_agent)
         publi(da["zhuti"],da["XX"])
         return '%s'% user_agent,200,[("token", "123456"), ("Set-Cookie", "shenzhen")]
     if request.method=="GET":
-        user_agent = request.get_data()
+        user_agent = request.args
         return '%s'% user_agent,200,[("token", "123456"), ("Set-Cookie", "shenzhen")]
 @app.route('/zt',methods=['POST','GET'])
 def abc():
