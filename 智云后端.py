@@ -93,18 +93,18 @@ class viewmysql():
         return a
 def publi(topic,msg):
     """mqtt消息发送"""
-    broker = '47.115.223.86'
+    broker = 'ip'
     port = 1883
     client_id = f'znwllw{random.randint(0, 1000)}'
-    username = 'admin'
-    password = 'zhangtao1123'
+    username = '222'
+    password = '22'
     client = mqtt_client.Client(client_id)
     client.username_pw_set(username, password)
     client.connect(broker, port)
     client.publish(topic, msg)
 def login():
     """登录消息服务器"""
-    url="http://47.115.223.86:18083/api/v5/login"
+    url="http://ip:18083/api/v5/login"
     data='{"username":"用户名","password":"密码"}'
     head={
     'Accept': '*/*',
@@ -114,9 +114,9 @@ def login():
     'Connection': 'keep-alive',
     'Content-Length': '46',
     'Content-Type': 'application/json',
-    'Host':'47.115.223.86:18083',
-    'Origin': 'http://47.115.223.86:18083',
-    'Referer': 'http://47.115.223.86:18083/',
+    'Host':'ip:18083',
+    'Origin': 'http://ip:18083',
+    'Referer': 'http://ip:18083/',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.39'
 }
     y=requests.session()
@@ -128,11 +128,11 @@ def login():
 'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
 'Authorization': 'Bearer {}'.format(datas["token"]),
 'Connection': 'keep-alive',
-'Host': '47.115.223.86:18083',
-'Referer': 'http://47.115.223.86:18083/',
+'Host': 'ip:18083',
+'Referer': 'http://ip:18083/',
 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.39'
 }
-    url="http://47.115.223.86:18083/api/v5/subscriptions?limit=500&page=1"
+    url="http://ip:18083/api/v5/subscriptions?limit=500&page=1"
     b=y.get(url=url,headers=had).text
     da=json.loads(b)
     article_info = {}
@@ -142,14 +142,14 @@ def login():
         
         data['sbmc{}'.format(i)] = '{}'.format(da["data"][i]["clientid"])
         data['sbzt{}'.format(i)] = '{}'.format(da["data"][i]["topic"])
-        u="http://47.115.223.86:18083/api/v5/clients/{}".format(da["data"][i]["clientid"])
+        u="http://ip:18083/api/v5/clients/{}".format(da["data"][i]["clientid"])
         h={'Accept': '*/*',
 'Accept-Encoding': 'gzip, deflate',
 'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
 'Authorization': 'Bearer {}'.format(datas["token"]),
 'Connection': 'keep-alive',
-'Host': '47.115.223.86:18083',
-'Referer': 'http://47.115.223.86:18083/',
+'Host': 'ip:18083',
+'Referer': 'http://ip:18083/',
 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.39'
 }
         ipa=y.get(url=u,headers=h).text
